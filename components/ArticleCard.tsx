@@ -4,9 +4,11 @@ import type { Article} from "@/lib/cms/types";
 export function ArticleCard({article }: {article: Article}) {
     return (
         <article className="border-b border-line py-6">
-            <p className="text-xs font-semibold uppercase tracking-wide text-crimson">
+            <Link
+            href={`/category/${article.category.slug}`}
+                className="text-xs font-semibold uppercase tracking-wide text-crimson hover:underline">
                 {article.category.name}
-            </p>
+            </Link>
             <h2 className="mt-2 font-serif text-2xl font-semibold text-ink">
                 <Link href={`/brief/${article.slug}`}>{article.title}</Link>
             </h2>
