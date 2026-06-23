@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAllArticles, getFeaturedArticles, getAllCategories } from "@/lib/cms/client";
+import {getAllArticles, getFeaturedArticles, getAllCategories, getArticleBySlug} from "@/lib/cms/client";
 
 describe("cms client", () => {
     it("returns articles sorted by newest first", async () => {
@@ -16,5 +16,15 @@ describe("cms client", () => {
     it("returns all categories", async () => {
         const categories = await getAllCategories();
         expect(categories.length).toBeGreaterThan(0);
-    })
-})
+    });
+
+    it("finds an article by slug", async () => {
+        const article = await getArticleBySlug("designation-velocity-2026");
+        expect(article?.title).toBe("Designation Velocity Hits a Five-Year High");
+    });
+
+    it("returns undefined for an unknown slug", async () => {
+        const article = await getArticleBySlug("does-not-exist");
+        expect(article).toBeUndefined();
+    });
+});
