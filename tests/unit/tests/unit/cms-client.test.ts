@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import {getAllArticles, getFeaturedArticles, getAllCategories, getArticleBySlug} from "@/lib/cms/client";
+import {
+    getAllArticles,
+    getFeaturedArticles,
+    getAllCategories,
+    getArticleBySlug,
+    getArticlesByCategory, getCategoryBySlug
+} from "@/lib/cms/client";
 
 describe("cms client", () => {
     it("returns articles sorted by newest first", async () => {
@@ -26,5 +32,16 @@ describe("cms client", () => {
     it("returns undefined for an unknown slug", async () => {
         const article = await getArticleBySlug("does-not-exist");
         expect(article).toBeUndefined();
+    });
+
+    it("finds a category by slug", async () => {
+        const category = await getCategoryBySlug("sanctions");
+        expect(category?.name).toBe("Sanctions");
+    });
+
+    it("filters articles by category", async () => {
+        const articles = await getArticlesByCategory("sanctions");
+        expect(articles.length).toBeGreaterThan(0);
+        expect(articles.every((a) => a.category.slug === "sanctions")).toBe(true);
     });
 });
