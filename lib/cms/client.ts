@@ -17,3 +17,8 @@ export async function getFeaturedArticles(limit = 1): Promise<Article[]> {
 export async function getAllCategories(): Promise<Category[]> {
     return categoryList;
 }
+
+export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
+    const all = await getAllArticles();
+    return all.find((article) => article.slug === slug);
+}
