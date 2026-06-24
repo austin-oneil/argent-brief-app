@@ -13,6 +13,9 @@ export function Header() {
                     <Link href="/" className="hover:text-ink">
                         Home
                     </Link>
+                    <Link href="/search" className="hover:text-ink">
+                        Search
+                    </Link>
                 </nav>
             </div>
         </header>
